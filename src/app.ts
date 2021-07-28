@@ -4,7 +4,7 @@ import "reflect-metadata";
 import { router } from "./router/router";
 import bodyParser from "body-parser";
 import "./dbConn";
-
+import cors from "cors";
 
 export const app: Application = express();
 
@@ -19,6 +19,13 @@ app.listen(port,()=>{
 app.get('/', (req: Request, res: Response) => {
     res.send("Server Started");
 });
+
+const corsOpts = {
+    origin: '*',
+  };
+  
+  app.use(cors(corsOpts));
+  
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())

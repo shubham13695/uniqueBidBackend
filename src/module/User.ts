@@ -1,10 +1,29 @@
 import { Request,Response } from "express";
-import { User, UserModal } from "../entity/User";
-class _UserModule{
+import { AuthRespository } from "../Repository/Auth.respository";
 
-    async CreateUser(req:Request,res:Response){
+import { UserRepository } from "../Repository/User.repository";
+
+let userRepository:UserRepository =  new UserRepository();
+let authRespository:AuthRespository = new AuthRespository();
+
+export class UserModule{
+
+    async login(req:Request,res:Response){
         try{
-            return res.status(200).send({data:"",msg:"User created Successfully"});
+            let user = await userRepository.findOne({email:req.body.email});
+            if(!user){
+                user = await userRepository.create(
+                    {
+                        email:req.body.email,
+                        image:req.body.image,
+                    }
+                );
+            }
+            let data = {
+                accessToken:await authRespository.generateAccessToken(user._id),
+                expire:process.env.ACCESS_TOKEN_EXPIRES_IN
+            }
+            return res.status(200).send({data:data,msg:"Logged in sucessfully"});
         }
         catch(ex){
             console.log(ex);
@@ -14,5 +33,3 @@ class _UserModule{
     }
 
 }
-
-export const UserModule = new _UserModule();
