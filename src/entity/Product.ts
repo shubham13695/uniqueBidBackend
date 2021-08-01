@@ -45,7 +45,6 @@ export const ProductModal = getModelForClass(Product, { schemaOptions: { timesta
 
 
 export class CreateProduct {
-    slug!: string;
     name!: string;
     shortDesc!: string[];
     longDesc!: string;

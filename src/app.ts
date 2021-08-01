@@ -2,9 +2,10 @@ import "dotenv/config";
 import express, { Application, Request, Response } from "express";
 import "reflect-metadata";
 import { router } from "./router/router";
-import bodyParser from "body-parser";
+import {urlencoded,json} from "body-parser";
 import "./dbConn";
 import cors from "cors";
+import fileUpload from "express-fileupload";
 
 export const app: Application = express();
 
@@ -27,7 +28,8 @@ const corsOpts = {
   app.use(cors(corsOpts));
   
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(urlencoded({ extended: true }))
+app.use(json())
+app.use(fileUpload());
 
 app.use("/api", router);
