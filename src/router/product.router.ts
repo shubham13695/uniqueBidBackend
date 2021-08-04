@@ -1,15 +1,12 @@
 import { Router } from "express";
-import { ProductModule } from "../module/Upload";
-// import { UserModule } from "../module/User";
-import { validate } from "./validation";
+import { ProductModule } from "../module/Product";
+
 export const ProductRouter = Router();
 
-let productModule = new ProductModule();
+let _ = new ProductModule();
 
-ProductRouter.post("/",productModule.upload);
-ProductRouter.get("/",validate);
-
-
+ProductRouter.post("/",_.create);
+ProductRouter.get("/",_.get);
 
 
 

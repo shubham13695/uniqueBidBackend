@@ -43,7 +43,6 @@ export class S3Client{
         if (extractedFilename) {
             return extractedFilename[1].toLowerCase();
         }
-
         return undefined;
     }
 

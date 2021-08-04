@@ -7,8 +7,8 @@ export class Product {
     @prop({ type: mongoose.Schema.Types.String })
     name!: string;
 
-    @prop({ type: mongoose.Schema.Types.Array })
-    shortDesc!: string[];
+    @prop({ type: ()=>[mongoose.Schema.Types.String] })
+    shortDesc!:  string[];
 
     @prop({ type: mongoose.Schema.Types.String })
     longDesc!: string;
@@ -22,7 +22,7 @@ export class Product {
     @prop({ type: mongoose.Schema.Types.String })
     bannerImage!: string;
 
-    @prop({ type: mongoose.Schema.Types.Array })
+    @prop({ type: ()=>[mongoose.Schema.Types.String]})
     images!: string[];
 
     @prop({ type: mongoose.Schema.Types.String })
@@ -46,12 +46,12 @@ export const ProductModal = getModelForClass(Product, { schemaOptions: { timesta
 
 export class CreateProduct {
     name!: string;
-    shortDesc!: string[];
+    shortDesc!:  string[];
     longDesc!: string;
     price!: number;
     cutOffPrice!: number;
     bannerImage!: string;
-    images!: string[];
+    images!:  string[];
     startDate!: Date;
     endDate!: Date;
     numberEnteries!: number;

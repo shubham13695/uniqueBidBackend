@@ -4,7 +4,7 @@ import { UploadedFile } from "express-fileupload";
 
 let uploadRepository:UploadRepository = new UploadRepository();
 
-export class ProductModule{
+export class UploadModule{
 
     async upload(req:Request,res:Response){
         try{
