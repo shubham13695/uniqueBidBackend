@@ -32,7 +32,7 @@ export class ProductRepository{
         return await ProductModal.exists({...query});
     }
 
-    async getPaginatedList(query:any,orderBy:number=-1,skip:number=0,limit:number=10){
+    async getPaginatedList(query:any,orderBy:number=1,skip:number=0,limit:number=10){
         return await ProductModal.find({...query}).sort({startDate:orderBy}).skip(skip).limit(limit);
     }
 

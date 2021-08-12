@@ -28,7 +28,21 @@ export class UserModule{
         catch(ex){
             console.log(ex);
             return res.status(500).send({error:"Something went wrong"});
+        }
+    }
 
+    async me(req:Request,res:Response){
+        try{
+            let user = req.body.user;
+            let resData={
+                email:user.email,
+                image:user.image
+            };
+            return res.status(200).send({data:resData});
+        }
+        catch(ex){
+            console.log(ex);
+            return res.status(500).send({error:"Something went wrong"});
         }
     }
 

@@ -25,10 +25,10 @@ export class Product {
     @prop({ type: ()=>[mongoose.Schema.Types.String]})
     images!: string[];
 
-    @prop({ type: mongoose.Schema.Types.String })
+    @prop({ type: mongoose.Schema.Types.Date })
     startDate!: Date;
 
-    @prop({ type: mongoose.Schema.Types.String })
+    @prop({ type: mongoose.Schema.Types.Date })
     endDate!: Date;
 
     @prop({ type: mongoose.Schema.Types.Number, default: 1 })

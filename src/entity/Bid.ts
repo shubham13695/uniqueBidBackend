@@ -1,4 +1,5 @@
 import { getModelForClass, mongoose, prop, Ref } from "@typegoose/typegoose";
+import { ObjectID } from "mongodb";
 import { Product } from "./Product";
 import { User } from "./User";
 
@@ -11,13 +12,16 @@ export class Bid{
     productID!:Ref<Product>;
 
     @prop({type:mongoose.Schema.Types.Number})
-    bidPrice!:Number;
+    bidPrice!:number;
 
-    @prop({type:mongoose.Schema.Types.Number,default:1})
-    numberBid!:number;
-
-    @prop({type:mongoose.Schema.Types.Boolean,default:false})
+    @prop({type:mongoose.Schema.Types.Boolean,default:true})
     status!:boolean;
 } 
 
 export const BidModal = getModelForClass(Bid,{schemaOptions:{timestamps:true}});
+
+export class CreateBid {
+    productID!: ObjectID;
+    bidPrice!:  number;
+    userID!:ObjectID;
+}

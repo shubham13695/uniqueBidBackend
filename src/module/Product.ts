@@ -28,7 +28,6 @@ export class ProductModule {
         catch (ex) {
             console.log(ex);
             return res.status(500).send({ error: "Something went wrong" });
-
         }
     }
 
@@ -41,13 +40,28 @@ export class ProductModule {
             };
             let query = req.query;
             let page = 1;
+            let sortBy = 1;
+            let limit = 12;
+            let skip = (limit * page) - limit;
             if (query.page) {
                 page = parseInt(query.page as string)
             }
-            let limit = 18;
-            let skip = (limit * page) - limit;
 
-            let filterdData = await productRepository.getPaginatedList(baseFilter, -1, skip, limit);
+            if(query.list=="inactive"){
+                baseFilter.$and.push({endDate:{ $lte : new Date() }})
+                sortBy = -1;
+            }
+            else if(query.list=="active"){
+                baseFilter.$and.push({startDate:{ $gte : new Date()}})
+                sortBy = 1;
+            }
+            else if(query.list=="upcomming"){
+                baseFilter.$and.push({startDate:{ $gte : new Date()},endDate:{$gte:new Date()}})
+                limit = 5;
+                sortBy = 1;
+            }
+
+            let filterdData = await productRepository.getPaginatedList(baseFilter, sortBy, skip, limit);
             let total: number = await productRepository.count(baseFilter);
 
             let data = {
