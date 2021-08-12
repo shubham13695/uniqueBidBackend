@@ -14,7 +14,7 @@ export class UserRepository{
     }
 
     async findOne(query:any):Promise<User|null>{
-        return  await UserModal.findOne({...query,status:true});
+        return await UserModal.findOne({...query,status:true});
     }
 
     async find(query:any):Promise<User[]|null>{

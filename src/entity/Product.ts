@@ -1,6 +1,9 @@
 import { getModelForClass, mongoose, prop } from "@typegoose/typegoose";
+import { ObjectId } from "mongoose";
 
 export class Product {
+    readonly _id!:ObjectId;
+
     @prop({ type: mongoose.Schema.Types.String })
     slug!: string;
 

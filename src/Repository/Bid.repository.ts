@@ -33,20 +33,20 @@ export class BidRepository {
                 }
             },
             {
-                $add:{
+                $addFields:{
                     bidPriceCount: {$size:"$priceEnteries"},
                     bidPrice:{$first:"$priceEnteries.bidPrice"},
                     userID:{$first:"$priceEnteries.userID"}
                 }
             },
             {
-                $count: {
+                $sort: {
                     "bidPriceCount": 1,
                     "priceEnteries.bidPrice": 1
                 }
             },
             {
-                $limt:limit
+                $limit:limit
             }
         ]);
     }

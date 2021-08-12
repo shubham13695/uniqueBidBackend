@@ -7,6 +7,6 @@ export const BidRouter = Router();
 let _ = new BidModule();
 
 BidRouter.post("/",authenticateJWT,_.create);
-
+BidRouter.get("/winner",authenticateJWT,_.getWinner);
 
 
